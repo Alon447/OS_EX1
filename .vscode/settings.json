@@ -1,0 +1,10 @@
+{
+	"chat.tools.terminal.autoApprove": {
+		"mkdir": true,
+		"cp": true,
+		"/^\\$env:PYTHONIOENCODING='utf-8'; python os3_grader\\.py temp_test2$/": {
+			"approve": true,
+			"matchCommandLine": true
+		}
+	}
+}

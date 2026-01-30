@@ -1,131 +1,70 @@
-# OS1 Shell Assignment Grader
+# Operating Systems Course - Grading System
 
-Automated grading system for the Operating Systems course shell assignment (HW1-2026).
+Automated grading tools for Operating Systems course assignments.
 
 ## Requirements
 
--  **Windows with WSL (Windows Subsystem for Linux)** - Required for compiling and running C code
--  **Python 3** - Installed in both Windows and WSL
--  **GCC** - C compiler (available in WSL Ubuntu by default)
+- **Windows with WSL** - For compiling and running C code
+- **Python 3** - Installed on Windows (and WSL for grading scripts)
 
-## Project Structure
+## Python Utilities (Root Folder)
 
-```
-OS_EX1/
-├── submissions/                    # Student submission folders
-│   └── <student_name>_<id>_assignsubmission_file/
-│       ├── <id>.tar.gz            # Original submission archive
-│       ├── os1.c                  # Student's shell implementation
-│       ├── os1.sh                 # Student's shell script
-│       └── os1.pdf                # Student's answers
-├── p_solution/                     # Lecturer's reference solution
-│   ├── os1.c
-│   └── os1.sh
-├── grading_results/                # Output directory (created after grading)
-│   ├── grading_summary.txt        # Summary of all grades
-│   ├── grading_summary.csv        # CSV export of grades
-│   ├── report_<student>.txt       # Individual student reports
-│   └── clean_outputs/             # Clean test outputs for comparison
-├── extract_submissions_from_zip.py # Extraction script
-├── test_script.py                  # Main grading script
-└── README.md                       # This file
-```
+### extract_submissions_from_zip.py
 
-## Usage
+Extracts student submission archives (.tar.gz and .zip files) from Moodle download folders. Automatically flattens nested directories to find the actual submission files.
 
-### Step 1: Extract Student Submissions
-
-First, extract all `.tar.gz` archives from student submission folders:
+**Usage:**
 
 ```cmd
+# Extract from default 'submissions' folder in current directory
 python extract_submissions_from_zip.py
+
+# Extract from a specific folder (e.g., Ex1/submissions)
+python extract_submissions_from_zip.py Ex1/submissions
+
+# Extract from Ex2
+python extract_submissions_from_zip.py Ex2/submissions
 ```
 
-This will:
+### extract_pdf.py
 
--  Find all student submission folders in `submissions/`
--  Extract any `.tar.gz` or `.zip` files
--  Flatten nested folders if needed
+Simple utility to extract text from PDF files using PyPDF2.
 
-### Step 2: Run the Grading Script
+## Exercise Folders
 
-Since this grading script compiles and runs C code (Linux executables), you need to run it through WSL:
+- **Ex1/** - Shell assignment grading (HW1)
+- **Ex2/** - Advanced shell grading (HW2)
+- **Ex3/** - Assignment 3 materials
 
-```cmd
-wsl -e python3 test_script.py
-```
+Each exercise folder has its own README with specific instructions.
 
-Or alternatively, open WSL terminal and run:
-
-```bash
-cd /mnt/c/Users/<your_username>/Projects/OS_EX1
-python3 test_script.py
-```
-
-### Step 3: View Results
-
-After grading completes, check the `grading_results/` folder:
-
--  **`grading_summary.xlsx`** - Excel file with Part A and Part B errors in separate columns (sorted by student ID)
--  **`grading_summary.csv`** - Simple CSV summary
--  **`grading_summary.txt`** - Quick overview of all student scores
--  **`report_<student>.txt`** - Detailed test results per student
-
-## Test Cases
-
-### Part A: os1.sh Script Tests
-
-| Test                | Description                                              |
-| ------------------- | -------------------------------------------------------- |
-| Directory creation  | Creates directory named by arg1                          |
-| greeting.txt format | Creates greeting.txt with "Hey $USER! My name is <NAME>" |
-| Compilation         | Compiles os1.c to os1exe with -Wall flag                 |
-| ls -la output       | Lists files in directory from arg3                       |
-
-### Part B: os1.c Shell Tests
-
-| Test               | Description                                   |
-| ------------------ | --------------------------------------------- |
-| Shell prompt       | Uses correct `$$ ` prompt                     |
-| `ls`               | Basic command execution                       |
-| `ls -l`            | Command with arguments                        |
-| `echo hello world` | Command with multiple arguments               |
-| `sleep 1 %`        | Background process execution and PID printing |
-| `pwd`              | Current directory command                     |
-| `invalid_command`  | Handling of invalid commands                  |
-| `cat os1.c`        | File display                                  |
-
-## HW1-2026 Requirements
-
-The student shell must implement:
-
--  **Prompt**: `$$ ` (dollar-dollar-space)
--  **Background character**: `%` (percent sign)
--  **Buffer size**: 2048 bytes
--  **Args array**: 200 elements (max 199 words)
--  **Source file**: `os1.c`
--  **Executable**: `os1`
+- **Prompt**: `$$ ` (dollar-dollar-space)
+- **Background character**: `%` (percent sign)
+- **Buffer size**: 2048 bytes
+- **Args array**: 200 elements (max 199 words)
+- **Source file**: `os1.c`
+- **Executable**: `os1`
 
 ## Troubleshooting
 
 ### "No os1.c files found"
 
--  Run the extraction script first: `python extract_submissions_from_zip.py`
+- Run the extraction script first: `python extract_submissions_from_zip.py`
 
 ### WSL not available
 
--  Install WSL: `wsl --install` (requires admin privileges)
--  Or use a Linux VM/machine to run the grading
+- Install WSL: `wsl --install` (requires admin privileges)
+- Or use a Linux VM/machine to run the grading
 
 ### Compilation errors
 
--  Check if `gcc` is installed in WSL: `wsl -e gcc --version`
--  Install if needed: `wsl -e sudo apt install build-essential`
+- Check if `gcc` is installed in WSL: `wsl -e gcc --version`
+- Install if needed: `wsl -e sudo apt install build-essential`
 
 ### Timeout errors
 
--  Default timeout is 5 seconds per test
--  Modify `TIMEOUT` variable in `test_script.py` if needed
+- Default timeout is 5 seconds per test
+- Modify `TIMEOUT` variable in `test_script.py` if needed
 
 ## Configuration
 

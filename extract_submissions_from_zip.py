@@ -9,6 +9,7 @@ import shutil
 import zipfile
 import tarfile
 from pathlib import Path
+import argparse
 
 
 def flatten_nested_folders(submission_folder: Path) -> None:
@@ -144,4 +145,12 @@ def process_submissions(submissions_dir: str = "submissions") -> None:
 
 
 if __name__ == "__main__":
-    process_submissions()
+    parser = argparse.ArgumentParser(description="Extract student submissions from archives")
+    parser.add_argument(
+        "submissions_dir",
+        nargs="?",
+        default="submissions",
+        help="Path to the submissions directory (default: submissions)"
+    )
+    args = parser.parse_args()
+    process_submissions(args.submissions_dir)
