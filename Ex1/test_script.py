@@ -22,7 +22,7 @@ except ImportError:
 # Configuration
 TIMEOUT = 5  # seconds
 OUTPUT_DIR = "grading_results"  # Directory for output files
-SUBMISSION_DIR = "submissions"  # Directory for student submissions
+SUBMISSION_DIR = "subs-2026B"  # Directory for student submissions
 # SUBMISSION_DIR = "subs"  # Directory for student submissions
 COMPILER = "gcc"
 COMPILER_FLAGS = "-Wall"

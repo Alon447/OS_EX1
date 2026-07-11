@@ -1,0 +1,1109 @@
+﻿========== איזבלה סבבוליה_89927_assignsubmission_file ==========
+#define CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+
+#include <unistd.h>    // for fork
+#include <sys/types.h> // for pid_t
+#include <sys/wait.h>
+
+#define STR_SEP " \t\n"
+
+int main()
+{
+    char line[2048];
+
+    while (1)
+    {
+        printf("$$"); // print $$ before each line
+        fflush(stdout);
+
+        if (fgets(line, 2048, stdin) == NULL)
+        {
+            printf("\n"); // read input from user
+            return 0;     // eof
+        }
+
+        char *args[200]; // list of arguments
+        args[0] = strtok(line, STR_SEP);
+
+        int i = 0; // num of arguments
+        while (args[i] != NULL)
+        {
+            ++i;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        if (i == 0) // if command is empty
+        {
+            continue;
+        }
+
+        // check for backgroung execution and if llast token is '%', run
+        // command in the backgorund
+        int background = 0;
+
+        if (strcmp(args[i - 1], "%") == 0)
+        { // last character is '%'
+            background = 1;
+            args[i - 1] = NULL; // remove '%' in the end
+            i = i - 1;
+
+            if (i == 0) // no command, '%' is the only token
+            {
+                continue;
+            }
+        }
+
+        // creating a child process
+        pid_t pid = fork();
+
+        if (pid < 0)
+        {
+            perror("fork"); // fork failed
+            continue;
+        }
+
+        if (pid == 0)
+        { // child process, replace child with requested program
+            execvp(args[0], args);
+            perror("execvp"); // command failed
+            _exit(1);
+        }
+        else // parent process
+        {
+            if (!background)
+            {
+                if (waitpid(pid, NULL, 0) < 0)
+                { // wait until child finishes
+                    perror("waitpid");
+                }
+            }
+
+            // in background processes reap children tht teminated, so we will have no zombies
+            // -1 to check all children
+            // null - no need for exit
+            // WNOHANG - do not block
+
+            while (1)
+            {
+                pid_t done = waitpid(-1, NULL, WNOHANG);
+                if (done > 0)
+                {
+                    printf("%d\n", (int)done);
+                    fflush(stdout);
+                }
+                else
+                {
+                    break; // no more backgrounf finished processes
+                }
+            }
+        }
+    }
+}
+
+========== מאי חגבי_89891_assignsubmission_file ==========
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h> 
+#include <sys/types.h>
+#define STR_SEP " \t\n"
+
+#define MAX_LINE 2048
+#define MAX_ARGS 200
+
+int main(int argc, char* argv[]) 
+{
+	while (1) 
+	{
+		int rc = fork();
+		if (rc < 0) {
+			fprintf(stderr, "fork failed\n");
+			exit(1);
+		}
+		else if (rc == 0)			// child
+		{
+			char* line[MAX_LINE];
+			printf("$$ ");
+
+			if (fgets(line, MAX_LINE, stdin) != NULL)
+			{
+				char* args[MAX_ARGS];
+				int i = 0;
+
+				args[0] = strtok(line, STR_SEP);
+				while (args[i] != NULL) {
+					args[++i] = strtok(NULL, STR_SEP);
+				}
+
+				int len = strlen(args[i - 1]);
+				if (args[i - 1][len - 1] != '%') {
+					waitpid(rc, NULL, 0);
+				}
+			}
+		}
+		else			//parent
+		{
+			wait(NULL);
+		}
+	}
+
+	return 0;
+}
+
+========== מאיה גבע_89937_assignsubmission_file ==========
+#include <stdio.h>     //for printf, fgets, stdin
+#include <string.h>    //for strtok
+#include <sys/wait.h>  //inserted for (WNOHANG) in waitpid - suggested in instructions
+#include <unistd.h>    //for fork, execvp
+
+#define STR_SEP " \t\n" 
+
+int main () {
+    char line[2048]; 
+    
+    while(fgets(line, 2048, stdin)) {    //goes over each line of user
+
+        int isBackground = 0;
+        printf("$$ ");
+        fflush(stdout);
+        
+        //breaks into each word in line
+        char* args[200]; 
+        args[0] = strtok(line, STR_SEP); 
+
+        if(args[0] == NULL)  //in case of empty line
+            continue;
+    
+        int i = 0;       
+        while (args[i] != NULL) { 
+            ++i; 
+            args[i] = strtok(NULL, STR_SEP); 
+        }
+    
+        //checks if this is a background command
+        if (strcmp(args[i-1], "%") == 0) {
+            isBackground = 1;
+            args[i-1] = NULL;
+        }
+
+        //creates and runs in a new process
+        int pid = fork();
+        if (pid == 0) {
+            execvp(args[0], args);
+            perror("execvp: No such file or directory"); //reaches only if execvp failed
+            exit(1);
+        }
+        else if (pid > 0){
+            if (!isBackground)
+                waitpid(pid, NULL, 0);
+            else {  //incase of background 
+                int rc = waitpid(-1, NULL, WNOHANG); //non waiting checks if child process is finished
+                if(rc > 0)  
+                    printf("%d\n", rc);  
+            }
+        }
+        else
+            perror("fork failed");
+
+    }
+    printf("$$ ");
+    printf("\n");
+}
+========== משי ברבי_89859_assignsubmission_file ==========
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
+#define STR_SEP " \t\n"
+
+int main() {
+    char line[2048];
+    char* args[200];
+
+    while (1) {
+        printf("$$ ");
+        fflush(stdout);
+
+        if (fgets(line, 2048, stdin) == NULL) {
+            break;
+        }
+
+        pid_t finished;
+        while ((finished = waitpid(-1, NULL, WNOHANG)) > 0) {
+            printf("%d\n", finished);
+        }
+
+        
+        args[0] = strtok(line, STR_SEP);
+        int i = 0;
+        if (args[0] == NULL) continue;
+
+        while (args[i] != NULL) {
+            i++;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        int background = 0;
+        if (i > 0 && strcmp(args[i-1], "%") == 0) {
+            background = 1;
+            args[i-1] = NULL;
+        }
+
+        pid_t pid = fork();
+
+        if (pid < 0) {
+            perror("fork failed");
+            continue;
+        }
+
+        if (pid == 0) {
+            execvp(args[0], args);
+            perror("exec failed");
+            exit(1);
+        } else {
+            if (!background) {
+                if (waitpid(pid, NULL, 0) == -1){
+                    perror("waitpid failed");
+                }
+            }
+        }
+    }
+
+    printf("\n");
+    return 0;
+}
+
+========== נועה צבעוני_89939_assignsubmission_file ==========
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+
+#define STR_SEP " \t\n"
+
+int main()
+{
+    char line[2048];
+
+    while (1)
+    {
+        int pid_z;
+        while ((pid_z = waitpid(-1, NULL, WNOHANG)) > 0)
+        {
+            printf("%d\n", pid_z);
+        }
+
+        printf("$%c ", '$');
+        fflush(stdout);
+
+        if (fgets(line, sizeof(line), stdin) == NULL)
+        {
+            printf("\n");
+            break;
+        }
+
+        int background = 0;
+        int len = strlen(line);
+        if (len > 1 && line[len - 2] == '%')
+        {
+            background = 1;
+            line[len - 2] = '\n';   
+            line[len - 1] = '\0';  
+        }
+
+        char* args[200];
+        args[0] = strtok(line, STR_SEP);
+
+        int i = 0;
+        while (args[i] != NULL)
+        {
+            ++i;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        pid_t pid = fork();
+
+        if (pid < 0)
+        {
+            perror("fork");
+            continue;
+        }
+
+        if (pid == 0) 
+        {
+            execvp(args[0], args);
+            perror("execvp");
+            _exit(1); 
+        }
+
+        if (!background)
+        {
+            waitpid(pid, NULL, 0);
+        }
+    }
+
+    return 0;
+}
+
+========== נועם פישביין_89938_assignsubmission_file ==========
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+#define STR_SEP " \t\n"
+
+int main() {
+    char line[2048];
+    char* args[200];
+    pid_t pid;
+
+    while (1) {
+        while ((pid = waitpid(-1, NULL, WNOHANG)) > 0) {
+            printf("%d\n", pid);
+        }
+
+        printf("$$ ");
+        fflush(stdout);
+
+        if (fgets(line, 2048, stdin) == NULL) {
+            break;
+        }
+
+        int i = 0;
+        args[i] = strtok(line, STR_SEP);
+        while (args[i] != NULL) {
+            ++i;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        if (i == 0) {
+            continue;
+        }
+
+        int background = 0;
+        if (strcmp(args[i - 1], "%") == 0) {
+            background = 1;
+            args[i - 1] = NULL;
+        }
+
+        pid = fork();
+        if (pid < 0) {
+            perror("fork failed");
+        } else if (pid == 0) {
+            if (execvp(args[0], args) < 0) {
+                perror("execvp failed");
+                exit(1);
+            }
+        } else {
+            if (!background) {
+                waitpid(pid, NULL, 0);
+            }
+        }
+    }
+
+    printf("\n");
+    return 0;
+}
+
+========== ניב לוין_89918_assignsubmission_file ==========
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#define STR_SEP " \t\n"
+
+int main()
+{
+    char line[2048];
+    char* args[200];
+
+    while (1)
+    {
+
+        int status;
+        pid_t finished_pid;
+
+        while ((finished_pid = waitpid(-1, &status, WNOHANG)) > 0)
+        {
+           printf("$$ done\n");
+        }
+        printf("$$ ");
+        fflush(stdout);
+
+        if (fgets(line, 2048, stdin) == NULL)
+        {
+            printf("\n");
+            break;
+        }
+
+        args[0] = strtok(line, STR_SEP);
+        int i = 0;
+
+        while (args[i] != NULL) {
+        i++;
+        args[i] = strtok(NULL, STR_SEP);
+        }
+
+        int background = 0;
+
+        if (i > 0 && args[i - 1][0] == '%' && args[i - 1][1] == '\0')
+        {
+           background = 1;
+           args[i - 1] = NULL;
+        }
+
+        if (args[0] == NULL)
+        {
+          continue;
+        }
+
+        pid_t pid = fork();
+        if (pid < 0)
+        {
+          perror("fork failed");
+          continue;
+        }
+
+        if (pid == 0)
+        {
+             execvp(args[0], args);
+             perror("execvp");
+             _exit(1);
+        }
+        else
+        {
+             if (!background)
+             {
+                waitpid(pid, NULL, 0);
+             }
+        }
+
+    }
+
+    return 0;
+}
+
+========== עדן גבריאל באגר_89879_assignsubmission_file ==========
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
+#define STR_SEP " \t\n"
+
+int main() {
+    char line[2048];
+    int reaped_pid;
+
+    while (1) {
+
+        while ((reaped_pid = waitpid(-1, NULL, WNOHANG)) > 0) {
+            printf("%d\n", reaped_pid);
+            fflush(stdout);
+        }
+
+        printf("$$ ");
+        fflush(stdout);
+
+        if (fgets(line, 2048, stdin) == NULL) {
+            break;
+        }
+
+        char *args[200];
+        int i = 0;
+        args[i] = strtok(line, STR_SEP);
+        while (args[i] != NULL) {
+            i++;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+
+        if (args[0] == NULL) {
+            continue;
+        }
+
+
+        if (strcmp(args[0], "cd") == 0) {
+            if (args[1] == NULL) {
+                fprintf(stderr, "cd: missing argument\n");
+            } else {
+                if (chdir(args[1]) != 0) {
+                    perror("cd failed");
+                }
+            }
+            continue;
+        }
+
+
+        int bg = 0;
+        if (i > 0 && strcmp(args[i - 1], "%") == 0) {
+            bg = 1;
+            args[i - 1] = NULL;
+        }
+        int pid = fork();
+        if (pid < 0) {
+            perror("fork failed");
+        } else if (pid == 0) {
+            execvp(args[0], args);
+            perror("execvp failed");
+            exit(1);
+        } else {
+            if (bg == 0) {
+                waitpid(pid, NULL, 0);
+                printf("Process %d dead\n", pid);
+            }
+        }
+    }
+
+    printf("\n");
+    return 0;
+
+
+}
+========== עומר זילברברג_89876_assignsubmission_file ==========
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+#define STR_SEP " \t\n"
+
+int main() {
+    char line[2048];
+    char* args[200];
+
+    while (1) {
+        // Print prompt
+        printf("$$ ");
+        fflush(stdout);
+
+        // Read input
+        if (fgets(line, 2048, stdin) == NULL) {
+            printf("\n");
+            break;
+        }
+
+        // Parse arguments
+        int i = 0;
+        args[0] = strtok(line, STR_SEP);
+        while (args[i] != NULL) {
+            ++i;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        // Skip empty input
+        if (args[0] == NULL) continue;
+
+        // Fork
+        pid_t pid = fork();
+
+        if (pid == -1) {
+            perror("fork");
+            continue;
+        }
+
+        if (pid == 0) {
+            // Child process
+            execvp(args[0], args);
+            perror(args[0]);
+            exit(1);
+        }
+        else {
+            // Parent process
+            waitpid(-1, NULL, WNOHANG);
+            int status;
+            waitpid(pid, &status, 0);
+        }
+    }
+
+    return 0;
+}
+========== עידן שאול_89909_assignsubmission_file ==========
+#include <stdio.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#define STR_SEP " \t\n"
+
+int main()
+{
+	while (1)
+	{
+		printf("$$ ");
+		fflush(stdout);
+		char line[2048];
+
+		if (fgets(line, 2048, stdin) == NULL)
+		{
+			printf("\n");
+			return 0;
+		}
+		
+		else
+		{
+			int zombiePid;
+			while ((zombiePid = waitpid(-1, NULL, WNOHANG)) > 0)
+			{
+				printf("%d\n", zombiePid);
+				fflush(stdout);
+			}
+			
+			char* args[200];
+			args[0] = strtok(line, STR_SEP);
+			int i = 0;
+			while (args[i] != NULL)
+			{
+				++i;
+				args[i] = strtok(NULL, STR_SEP);
+			}
+
+			if (args[0] == NULL)
+			{
+				continue;
+			}
+
+			int rc = fork();
+
+			if (rc < 0)
+			{
+				perror("The fork didn't work!");
+			}
+			else if (rc == 0)
+			{
+				if (args[i - 1][0] == '%' && args[i - 1][1] == '\0')
+				{
+					args[i - 1] = NULL;
+				}
+				execvp(args[0], args);
+				perror("execvp failed");
+				return 1;
+			}
+			else
+			{
+				if (args[i - 1][0] != '%' || args[i - 1][1] != '\0')
+				{
+					if (waitpid(rc, NULL, 0) < 0)
+					{
+						perror("Waitpid Failed!");
+					}
+				}
+			}
+		}
+	}
+}
+========== עמית יוסף_89899_assignsubmission_file ==========
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+#define STR_SEP " \t\n"
+
+int main() {
+    char line[2048];
+    char *args[200];
+    int i;
+
+    while (1) {
+        while (waitpid(-1, NULL, WNOHANG) > 0);
+
+        printf("$$ ");
+        fflush(stdout);
+
+        if (fgets(line, 2048, stdin) == NULL)
+        {
+            break;
+        }
+
+        args[0] = strtok(line, STR_SEP);
+        i = 0;
+        while (args[i] != NULL)
+        {
+            i++;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        if (args[0] == NULL) 
+            continue;
+       
+
+        int flag = 0;
+        if (i > 0 && args[i - 1][0] == '%' && args[i - 1][1] == '\0')
+        {
+            flag = 1;
+            args[i - 1] = NULL;
+        }
+
+        int pid = fork();
+        if (pid == 0) {
+            if (execvp(args[0], args) == -1) {
+                printf("command not found\n");
+                exit(1);
+            
+            }
+        } else {
+            if (flag == 0) {
+                waitpid(pid, NULL, 0);
+            }
+        }
+    }
+
+    printf("\n");
+}
+========== רוי חיים כלפון_89896_assignsubmission_file ==========
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#define MAX_LINE 2048
+#define STR_SEP " \t\n"
+void collecting_all_zombiyes(void) {
+    pid_t done;
+    while ((done = waitpid(-1, NULL, WNOHANG)) > 0) {
+        printf("%d\n", done);
+    }
+}
+
+void clean_odd_char_command(char **pargs) {
+    if (pargs[0] == NULL) {
+        return;
+    }
+
+    unsigned char *p = (unsigned char *)pargs[0];
+    while (*p != '\0' && (*p < 32 || *p > 126)) {
+        p++;
+    }
+    pargs[0] = (char *)p;
+}
+
+int main(void) {
+    char line[MAX_LINE];
+    char *args[200];
+    while (1) {
+        collecting_all_zombiyes();
+    	printf("$$ ");
+        fflush(stdout);
+	if (fgets(line, MAX_LINE, stdin) == NULL) {
+            break;
+        }
+        args[0] = strtok(line, STR_SEP);
+
+        int i = 0;
+        while (args[i] != NULL && i + 1 < 200) {
+            ++i;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+        if (args[0] == NULL) {
+            continue;
+        }
+        int backgrounds = 0;
+        if (i > 0 && args[i-1] != NULL && strcmp(args[i-1], "%") == 0) {
+            backgrounds = 1;
+            args[i-1] = NULL;
+        }
+	clean_odd_char_command(args);
+
+        pid_t pid = fork();
+        if (pid < 0) {
+            perror("fork");
+            continue;
+        }
+
+        if (pid == 0) {
+            execvp(args[0], args);
+            perror("execvp");
+            _exit(1);
+        } else {
+            if (!backgrounds) {
+                int status;
+                if (waitpid(pid, &status, 0) < 0) {
+                    perror("waitpid");
+                }
+            }
+        }
+    }
+
+    printf("\n");
+    return 0;
+}
+
+
+========== שחר קלדרון_89886_assignsubmission_file ==========
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+// #define  _POSIX_C_SOURCE  200809L
+#include <signal.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#define STR_SEP " \t\n"
+
+void sigchld_handler(int signal);
+void execWithoutWait(char *argv[]);
+void execWithWait(char *argv[]);
+
+int main(int argc, char *argv[])
+{
+    char line[2048] = "dummy";
+    // setvbuf(stdout, NULL, _IOLBF, 0);
+    struct sigaction act;
+    sigemptyset(&act.sa_mask);
+    act.sa_handler = sigchld_handler; // or: act.sa_handler = SIG_IGN;
+    act.sa_flags = 0;
+
+    if (sigaction(SIGCHLD, &act, NULL) == -1)
+    {
+        fprintf(stderr, "sigaction failed\n");
+        exit(1);
+    }
+
+    printf("$$ ");
+
+    while (fgets(line, 2048, stdin) != NULL)
+    {
+        fflush(stdout);
+        // gets input
+        char *args[200];
+        args[0] = strtok(line, STR_SEP);
+
+        int i = 0;
+        while (args[i] != NULL)
+        {
+            ++i;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        args[i] =NULL;
+
+        // does process
+        if (*args[i - 1] == '%')
+        {
+            args[i - 1] = NULL;
+            execWithoutWait(args);
+        }
+        else
+        {
+            if(*args[i - 1] == '\n') *args[i - 1] = 0;
+            execWithWait(args);
+        }
+
+        printf("$$ ");
+    }
+
+    printf("\n");
+
+}
+
+void execWithWait(char *argv[])
+{
+    if (!fork() && argv[0] != NULL)
+    {
+        execvp(argv[0], argv);
+    }
+    else
+    {
+        wait(NULL);
+    }
+}
+
+void sigchld_handler(int signal)
+{
+    int rc = waitpid(-1, NULL, WNOHANG);
+
+    if (rc > 0)
+    {
+        printf("%d\n", rc);
+    }
+}
+
+void execWithoutWait(char *argv[])
+{
+    if (!fork())
+    {
+        execvp(argv[0], argv);
+    }
+}
+
+========== שיר חורי_89913_assignsubmission_file ==========
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+#define STR_SEP " \t\n"
+#define LINE_SIZE 2048
+
+static void reap_zombies(void)
+{
+    pid_t r;
+    while ((r = waitpid(-1, NULL, WNOHANG)) > 0)
+    {
+        printf("%d\n", r);
+    }
+}
+
+int main(void)
+{
+    char line[LINE_SIZE];
+    char* args[200];
+    int is_bg;
+    pid_t cpid;
+
+    for (;;)
+    {
+        reap_zombies();
+
+        if (write(STDOUT_FILENO, "$$ ", 3) < 0)
+        {
+            perror("write");
+        }
+
+        if (fgets(line, LINE_SIZE, stdin) == NULL)
+        {
+            break;
+        }
+
+        args[0] = strtok(line, STR_SEP);
+        int i = 0;
+        while (args[i] != NULL) {
+            ++i;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        if (i == 0)
+        {
+            continue;
+        }
+
+        is_bg = 0;
+        if (args[i - 1][0] == '%' && args[i - 1][1] == '\0')
+        {
+            args[i - 1] = NULL;
+            i--;
+            is_bg = 1;
+        }
+
+        if (i == 0)
+        {
+            continue;
+        }
+
+        cpid = fork();
+        if (cpid < 0)
+        {
+            perror("fork");
+            continue;
+        }
+        if (cpid == 0)
+        {
+            execvp(args[0], args);
+            perror("execvp");
+            _exit(1);
+        }
+
+        if (!is_bg)
+        {
+            if (waitpid(cpid, NULL, 0) < 0)
+            {
+                perror("waitpid");
+            }
+        }
+    }
+
+    printf("\n");
+    return 0;
+}
+
+========== שירה גולן_89893_assignsubmission_file ==========
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <errno.h>
+#include <string.h>
+
+#define MAX_LINE 2048
+#define MAX_ARGS 200
+#define STR_SEP " \t\n"
+
+int main(void)
+{
+    char line[MAX_LINE];
+    char *args[MAX_ARGS];
+    int status;
+
+    for (;;) {
+        pid_t pid;
+
+        while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
+            printf("%d\n", (int)pid);
+        }
+
+        write(1, "$$ ", 3);
+
+        if (fgets(line, sizeof(line), stdin) == NULL) {
+            write(1, "\n", 1);
+            while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
+                printf("%d\n", (int)pid);
+            }
+            return 0;
+        }
+
+        args[0] = strtok(line, STR_SEP);
+        int i = 0;
+        while (args[i] != NULL) {
+            ++i;
+            args[i] = strtok(NULL, STR_SEP);
+        }
+
+        if (args[0] == NULL) {
+            continue;
+        }
+
+        int background = 0;
+        if (i > 0 && args[i - 1] != NULL &&
+            args[i - 1][0] == '%' && args[i - 1][1] == '\0') {
+
+            background = 1;
+            args[i - 1] = NULL;
+            if (args[0] == NULL) {
+                continue;
+            }
+        }
+
+        pid = fork();
+        if (pid < 0) {
+            perror("fork");
+            continue;
+        }
+
+        if (pid == 0) {
+            execvp(args[0], args);
+            perror("execvp");
+            _exit(1);
+        }
+
+        if (!background) {
+            while (waitpid(pid, &status, 0) == -1) {
+                if (errno != EINTR) {
+                    perror("waitpid");
+                    break;
+                }
+            }
+        }
+    }
+}
+

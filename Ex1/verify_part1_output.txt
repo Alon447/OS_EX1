@@ -1,0 +1,694 @@
+﻿
+================================================================
+STUDENT: ╫É╫Ö╫û╫æ╫£╫ö ╫í╫æ╫æ╫ò╫£╫Ö╫ö_89927_assignsubmission_file
+================================================================
+  exit=124 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    42 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  2487 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16528 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Izabella Svavolya
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    $$
+================================================================
+STUDENT: ╫æ╫ƒ ╫ò╫É╫ƒ_89873_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 32
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447  2292 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16824 May 29 17:32 os1exe
+  greeting.txt: MISSING
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    total 32
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447  2292 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16824 May 29 17:32 os1exe
+
+================================================================
+STUDENT: ╫æ╫ƒ ╫ù╫Ö╫Ö╫ÿ╫Ö╫ƒ_89905_assignsubmission_file
+================================================================
+  exit=2 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 12
+    drwxr-xr-x 2 alon447 alon447 4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447 4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447   35 May 29 17:32 greeting.txt
+  greeting.txt:
+    Hey alon447! My name is Ben Jaitin
+  os1exe: MISSING
+  --- stdout (first 10 lines) ---
+  --- stderr (first 10 lines) ---
+    cp: cannot stat '/home/alon447//tmp/os1_verify_scZOv0/os1.c': No such file or directory
+    ls: cannot access '/home/alon447//tmp': No such file or directory
+
+================================================================
+STUDENT: ╫Æ╫Ö╫á╫É╫ƒ ╫ó╫É╫í╫Ö_89869_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447 16520 May 29 17:32 exe1os
+    -rw-r--r-- 1 alon447 alon447    35 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  2631 May 29 17:32 os1.c
+  greeting.txt:
+    Hey alon447! My name is Jinan Assi
+  os1exe: MISSING
+    (other binary-ish files: exe1os)
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_Y2oFP0
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫ô╫ò╫¿╫ò╫ƒ ╫⌐╫ƒ ╫ª╫ò╫¿_89934_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447 16448 May 29 17:32 exe1os
+    -rw-r--r-- 1 alon447 alon447    40 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1885 May 29 17:32 os1.c
+  greeting.txt:
+    Hey alon447! My name is Doron Shen-Tzur
+  os1exe: MISSING
+    (other binary-ish files: exe1os)
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_gG0zqZ
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫ô╫Ö╫₧╫Ö╫ÿ╫¿╫Ö ╫ÿ╫ò╫ô╫ò╫í╫Ö╫Ö╫æ_89916_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447 16616 May 29 17:32 exe1os
+    -rw-r--r-- 1 alon447 alon447    32 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  2244 May 29 17:32 os1.c
+  greeting.txt:
+    Hey alon447! My name is Dimitry
+  os1exe: MISSING
+    (other binary-ish files: exe1os)
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_q8DBdb
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫Ö╫ò╫É╫æ ╫ò╫Ö╫á╫⌐╫ÿ╫Ö╫Ö╫ƒ_89865_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447 16640 May 29 17:32 exe1os
+    -rw-r--r-- 1 alon447 alon447    39 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1881 May 29 17:32 os1.c
+  greeting.txt:
+    Hey alon447! My name is YOAV WEINSTEIN
+  os1exe: MISSING
+    (other binary-ish files: exe1os)
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_dIEwG1
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫Ö╫ò╫æ╫£ ╫Æ╫æ╫É╫Ö_89875_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 12
+    drwxr-xr-x 2 alon447 alon447 4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447 4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447   36 May 29 17:32 greeting.txt
+  greeting.txt:
+    Hey alon447! My name is Yuval Gabay
+  os1exe: MISSING
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_e6V32U
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+  --- stderr (first 10 lines) ---
+    cp: cannot stat '..//tmp/os1_verify_e6V32U/os1.c': No such file or directory
+
+================================================================
+STUDENT: ╫Ö╫¿╫ò╫ƒ ╫₧╫Ö╫¿╫ò╫£╫ò╫û_89900_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447 16776 May 29 17:32 exe1os
+    -rw-r--r-- 1 alon447 alon447    38 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  2322 May 29 17:32 os1.c
+  greeting.txt:
+    Hey alon447! My name is Yaron Miroluz
+  os1exe: MISSING
+    (other binary-ish files: exe1os)
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_hiKlR8
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫£╫Ö╫É╫ò╫¿ ╫¿╫ò╫í╫á╫ò╫æ╫í╫º╫Ö_89936_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    40 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1669 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16520 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Lior Rusanovsky
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    .
+    ..
+    .ICE-unix
+    .X11-unix
+    .XIM-unix
+    .font-unix
+    os1_verify_vMXELZ
+    snap-private-tmp
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-resolved.service-jfBHSI
+
+================================================================
+STUDENT: ╫£╫Ö╫É╫ò╫¿ ╫⌐╫₧╫ù╫Ö╫Ö╫æ_89920_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    38 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1560 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16520 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Lior Simhayev
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    .
+    ..
+    .ICE-unix
+    .X11-unix
+    .XIM-unix
+    .font-unix
+    os1_verify_Hq6iz3
+    snap-private-tmp
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-resolved.service-jfBHSI
+
+================================================================
+STUDENT: ╫₧╫É╫ò╫¿ ╫É╫ô╫Ö╫¿╫Ö╫¥_89892_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    36 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1657 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16440 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Maor Adirim
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    .
+    ..
+    .ICE-unix
+    .X11-unix
+    .XIM-unix
+    .font-unix
+    os1_verify_ALnxHp
+    snap-private-tmp
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-resolved.service-jfBHSI
+
+================================================================
+STUDENT: ╫₧╫É╫Ö ╫ù╫Æ╫æ╫Ö_89891_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 12
+    drwxr-xr-x 2 alon447 alon447 4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447 4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447   34 May 29 17:32 greeting.txt
+  greeting.txt:
+    Hey alon447! My name is May Hajbi
+  os1exe: MISSING
+  --- stdout (first 10 lines) ---
+    .
+    ..
+    .ICE-unix
+    .X11-unix
+    .XIM-unix
+    .font-unix
+    os1_verify_ST9xrZ
+    snap-private-tmp
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-resolved.service-jfBHSI
+  --- stderr (first 10 lines) ---
+    cp: missing file operand
+    Try 'cp --help' for more information.
+    basename: missing operand
+    Try 'basename --help' for more information.
+    gcc: fatal error: no input files
+    compilation terminated.
+
+================================================================
+STUDENT: ╫₧╫É╫Ö╫ö ╫Æ╫æ╫ó_89937_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    34 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1614 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16520 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Maya Geva
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    .:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    34 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1614 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16520 May 29 17:32 os1exe
+    
+    /tmp:
+    total 48
+  --- stderr (first 10 lines) ---
+    os1.c: In function ΓÇÿmainΓÇÖ:
+    os1.c:41:13: warning: implicit declaration of function ΓÇÿexitΓÇÖ [-Wimplicit-function-declaration]
+       41 |             exit(1);
+          |             ^~~~
+    os1.c:5:1: note: include ΓÇÿ<stdlib.h>ΓÇÖ or provide a declaration of ΓÇÿexitΓÇÖ
+        4 | #include <unistd.h>    //for fork, execvp
+      +++ |+#include <stdlib.h>
+        5 | 
+    os1.c:41:13: warning: incompatible implicit declaration of built-in function ΓÇÿexitΓÇÖ [-Wbuiltin-declaration-mismatch]
+       41 |             exit(1);
+
+================================================================
+STUDENT: ╫₧╫⌐╫ö ╫Ö╫á╫Ö╫æ ╫ÿ╫£_89895_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 12
+    drwxr-xr-x 2 alon447 alon447 4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447 4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447   36 May 29 17:32 greeting.txt
+  greeting.txt:
+    Hello alon447! My name is Moshe Tal
+  os1exe: MISSING
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_Ljh9Tt
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+  --- stderr (first 10 lines) ---
+    cp: missing destination file operand after '/tmp/os1_verify_Ljh9Tt/os1.c'
+    Try 'cp --help' for more information.
+
+================================================================
+STUDENT: ╫á╫ò╫ó╫ö ╫ª╫æ╫ó╫ò╫á╫Ö_89939_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    36 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1322 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16528 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Noa Tsivoni
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_fSmB0y
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫á╫Ö╫ª╫ƒ ╫æ╫¿ ╫É╫ò╫¿_89884_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    38 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1344 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16440 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Nitzan Bar Or
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_b9bEmH
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫ó╫ô╫Ö ╫ñ╫á╫í╫ò_89874_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    34 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1411 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16480 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Adi Penso
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_LkdSWw
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫ó╫Ö╫ô╫ƒ ╫Æ╫£╫ò╫æ╫ò╫í_89935_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    53 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1086 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16520 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is /tmp/os1_verify_y093DN/os1.c
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+
+================================================================
+STUDENT: ╫ó╫Ö╫ô╫ƒ ╫⌐╫É╫ò╫£_89909_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    35 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1148 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16440 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Idan Shaul
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_Ziyy6q
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫¿╫ò╫¥ ╫₧╫É╫Ö╫¿_89925_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447 16624 May 29 17:32 exe1os
+    -rw-r--r-- 1 alon447 alon447    33 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1582 May 29 17:32 os1.c
+  greeting.txt:
+    Hey alon447! My name is ROM MEIR
+  os1exe: MISSING
+    (other binary-ish files: exe1os)
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_SigxJh
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫¿╫ò╫ó╫Ö ╫⌐╫£╫ò╫¥_89890_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    36 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1547 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16480 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Roei Shalom
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    .
+    ..
+    .ICE-unix
+    .X11-unix
+    .XIM-unix
+    .font-unix
+    os1_verify_fFNHly
+    snap-private-tmp
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+    systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-resolved.service-jfBHSI
+
+================================================================
+STUDENT: ╫¿╫ù╫£╫Ö ╫⌐╫Ö╫¿╫É╫£ ╫æ╫¿ ╫£╫æ_89858_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 32
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    46 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1696 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16384 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Raheli Shirel Bar Lev
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_aJSJm3
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫⌐╫ù╫¿ ╫º╫£╫ô╫¿╫ò╫ƒ_89886_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    40 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1884 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16776 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447 My name is Shachar Kalderon
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_zyQLNF
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫⌐╫Ö╫¿╫ö ╫Æ╫ò╫£╫ƒ_89893_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rwxr-xr-x 1 alon447 alon447 16448 May 29 17:32 exe1os
+    -rw-r--r-- 1 alon447 alon447    36 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  1665 May 29 17:32 os1.c
+  greeting.txt:
+    Hey alon447! My name is Shira Golan
+  os1exe: MISSING
+    (other binary-ish files: exe1os)
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_2NFooz
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+
+================================================================
+STUDENT: ╫¬╫ò╫₧╫¿ ╫¢╫ö╫ƒ_89908_assignsubmission_file
+================================================================
+  exit=0 (124 = timeout)
+  dir created: YES
+  dir contents:
+    total 36
+    drwxr-xr-x 2 alon447 alon447  4096 May 29 17:32 .
+    drwx------ 3 alon447 alon447  4096 May 29 17:32 ..
+    -rw-r--r-- 1 alon447 alon447    36 May 29 17:32 greeting.txt
+    -rwxr-xr-x 1 alon447 alon447  2041 May 29 17:32 os1.c
+    -rwxr-xr-x 1 alon447 alon447 16648 May 29 17:32 os1exe
+  greeting.txt:
+    Hey alon447! My name is Tomer Cohen
+  os1exe: YES
+  --- stdout (first 10 lines) ---
+    total 48
+    drwxrwxrwt 13 root    root    4096 May 29 17:32 .
+    drwxr-xr-x 23 root    root    4096 May 29 17:32 ..
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .ICE-unix
+    drwxrwxrwx  2 root    root      60 May 29 17:32 .X11-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .XIM-unix
+    drwxrwxrwt  2 root    root    4096 May 29 17:32 .font-unix
+    drwx------  3 alon447 alon447 4096 May 29 17:32 os1_verify_tiqzQU
+    drwx------  2 root    root    4096 May 29 17:32 snap-private-tmp
+    drwx------  3 root    root    4096 May 29 17:32 systemd-private-ad9be8c9c82e40a098663a980520ec1c-systemd-logind.service-MBKff7
+  --- stderr (first 10 lines) ---
+    os1.c:12:6: warning: return type of ΓÇÿmainΓÇÖ is not ΓÇÿintΓÇÖ [-Wmain]
+       12 | void main()
+          |      ^~~~

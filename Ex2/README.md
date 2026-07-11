@@ -11,63 +11,69 @@ Grading system for the advanced shell assignment with I/O redirection and pipes.
 - Single pipes (`|`)
 - Double pipes (`|` `|`)
 
-## Files
+## Grading Scripts
 
-### test_os2.py
+### test_os2_part1.py — Shell tests (Part 1)
 
-Main grading script that tests shell functionality and generates grades.
-
-**Usage:**
+Compiles and tests shell functionality. Runs under WSL.
 
 ```bash
-# Test all students
-wsl python3 test_os2.py
-
-# Test first 10 only
-wsl python3 test_os2.py --test
+wsl python3 test_os2_part1.py           # all students
+wsl python3 test_os2_part1.py --test    # first 10 only
 ```
 
-**Results:** `grading_results/grades.csv`
+**Output:** `grading_results/grades.csv`
 
-### extract_part2_answers.py
+### test_os2_part2.py — Theory PDF grading (Part 2)
 
-Extracts answers from student PDF submissions for theoretical questions. Automatically grades questions 1 and 2, generates CSV with results and feedback.
-
-**Usage:**
+Extracts answers from student PDFs and grades Q1/Q2. Runs on Windows.
 
 ```bash
-python extract_part2_answers.py
+python test_os2_part2.py
 ```
 
-**Output:** `part2_extracted_answers.csv`
+**Output:** `grading_results/part2_extracted_answers.csv`
+
+### combine_grades.py — Final grades
+
+Merges Part 1 and Part 2 results into a single CSV with per-student messages.
+
+```bash
+python combine_grades.py
+```
+
+**Output:** `grading_results/final_grades.csv`
 
 ## Folder Structure
 
-- **submissions/** - Student submission folders
-- **p_solution/** - Reference solution
-- **grading_results/** - Test results from `test_os2.py`
-- **part2_grading/** - Additional grading materials
+- **subs-26b/** — Current (2026B) student submissions
+- **submissions/** — 2025 student submissions (archived)
+- **subs/** — Misc/test submissions
+- **p_solution/** — Reference solution
+- **grading_results/** — All grading output CSVs
+- **part2_grading/** — Additional part 2 materials
 
 ## Quick Workflow
 
 1. Extract submissions using root `extract_submissions_from_zip.py`
-2. Run automated tests: `wsl python3 test_os2.py`
-3. Extract PDF answers: `python extract_part2_answers.py`
-4. Check results in CSV files
+2. Run Part 1 tests: `wsl python3 test_os2_part1.py`
+3. Run Part 2 grading: `python test_os2_part2.py`
+4. Combine: `python combine_grades.py`
+5. Review `grading_results/final_grades.csv`
 
-5. **Compile (if needed):**
+6. **Compile (if needed):**
 
    ```bash
    gcc os2.c -o os2 -Wall
    ```
 
-6. **Run the shell:**
+7. **Run the shell:**
 
    ```bash
    ./os2
    ```
 
-7. **Test commands manually:**
+8. **Test commands manually:**
    ```bash
    $$ ls
    $$ pwd

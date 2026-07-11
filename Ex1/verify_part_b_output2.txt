@@ -1,0 +1,169 @@
+﻿
+===================================================================
+STUDENT: ╫₧╫É╫Ö╫ö ╫Æ╫æ╫ó_89937_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 2)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ execvp: No such file or directory: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 28 -rw-r--r-- 1 alon447 alon447   611 May 29 18:11 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ execvp: No such file or directory: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp: No such file or directory: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_GoeoAN $$ execvp: No such file or directory: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ execvp: No such file or directory: No such file or directory $$ execvp: No such file or directory
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h>     //for printf, fgets, stdin #include <string.h>    //for strtok #include <s
+
+===================================================================
+STUDENT: ╫₧╫⌐╫Ö ╫æ╫¿╫æ╫Ö_89859_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ exec failed: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:11 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ exec failed: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ exec failed: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_L6axN3 $$ exec failed: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ exec failed: No such file or directory $$ exec failed: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <unistd.h> #include <string.h> #include <sys/wait.h> #include <stdlib
+
+===================================================================
+STUDENT: ╫á╫ò╫ó╫ö ╫ª╫æ╫ó╫ò╫á╫Ö_89939_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ execvp: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ execvp: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_LgkrfC $$ execvp: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ execvp: No such file or directory $$ execvp: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <unistd.h> #include <sys/wait.h> #include <string.h>  #define STR_SEP
+
+===================================================================
+STUDENT: ╫á╫ò╫ó╫¥ ╫ñ╫Ö╫⌐╫æ╫Ö╫Ö╫ƒ_89938_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ execvp failed: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ execvp failed: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp failed: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_E1G7te $$ execvp failed: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ execvp failed: No such file or directory $$ execvp failed: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <stdlib.h> #include <string.h> #include <unistd.h> #include <sys/wait
+
+===================================================================
+STUDENT: ╫á╫Ö╫æ ╫£╫ò╫Ö╫ƒ_89918_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ execvp: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ execvp: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_xe6A95 $$ execvp: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ execvp: No such file or directory $$ execvp: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <string.h> #include <stdio.h> #include <unistd.h> #include <sys/wait.h> #define STR_SEP 
+
+===================================================================
+STUDENT: ╫ó╫ô╫ƒ ╫Æ╫æ╫¿╫Ö╫É╫£ ╫æ╫É╫Æ╫¿_89879_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c Process 886 dead $$ execvp failed: No such file or directory Process 887 de
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world Process 910 dead $$ execvp failed: No such file or directory Process 911 dead $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp failed: No such file or directory Process 923 dead $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_F1adIF Process 934 dead $$ execvp failed: No such file or directory Process 935 dead $$
+  cmd [invalid_command]      : ok :: $$ execvp failed: No such file or directory Process 946 dead $$ execvp failed: No such file or direc
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <string.h> #include <unistd.h> #include <sys/wait.h> #include <stdlib
+
+===================================================================
+STUDENT: ╫ó╫ò╫₧╫¿ ╫û╫Ö╫£╫æ╫¿╫æ╫¿╫Æ_89876_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ exit: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ exit: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ sleep: invalid time interval ΓÇÿ%ΓÇÖ Try 'sleep --help' for more information. $$ exit: No such fi
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_ZoNkoC $$ exit: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ invalid_command: No such file or directory $$ exit: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <string.h> #include <stdlib.h> #include <sys/wait.h> #include <unistd
+
+===================================================================
+STUDENT: ╫ó╫Ö╫ô╫ƒ ╫⌐╫É╫ò╫£_89909_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ execvp failed: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ execvp failed: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp failed: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_JFBjUL $$ execvp failed: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ execvp failed: No such file or directory $$ execvp failed: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <string.h> #include <sys/wait.h> #include <unistd.h> #define STR_SEP 
+
+===================================================================
+STUDENT: ╫ó╫₧╫Ö╫¬ ╫Ö╫ò╫í╫ú_89899_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ command not found $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ command not found $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ command not found $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_RJWPDU $$ command not found $$ 
+  cmd [invalid_command]      : ok :: $$ command not found $$ command not found $$ 
+  cmd [cat os1.c]            : ok :: $$ ∩╗┐#include <stdio.h> #include <stdlib.h> #include <string.h> #include <unistd.h> #include <sys/w
+
+===================================================================
+STUDENT: ╫¿╫ò╫Ö ╫ù╫Ö╫Ö╫¥ ╫¢╫£╫ñ╫ò╫ƒ_89896_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ execvp: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ execvp: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_q2bBi4 $$ execvp: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ execvp: No such file or directory $$ execvp: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <unistd.h> #include <string.h> #include <sys/wait.h> #include <sys/ty
+
+===================================================================
+STUDENT: ╫⌐╫ù╫¿ ╫º╫£╫ô╫¿╫ò╫ƒ_89886_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ $$  $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ $$  $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ $$  $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_qw110p $$ $$  $$ 
+  cmd [invalid_command]      : ok :: $$ $$ $$  $$  $$ $$  $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <string.h> #include <stdio.h> #include <stdlib.h> // #define  _POSIX_C_SOURCE  200809L #
+
+===================================================================
+STUDENT: ╫⌐╫Ö╫¿ ╫ù╫ò╫¿╫Ö_89913_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ execvp: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ execvp: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_0SxVKp $$ execvp: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ execvp: No such file or directory $$ execvp: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <string.h> #include <unistd.h> #include <sys/wait.h>  #define STR_SEP
+
+===================================================================
+STUDENT: ╫⌐╫Ö╫¿╫ö ╫Æ╫ò╫£╫ƒ_89893_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': OK
+  cmd [ls]                   : ok :: $$ compile.err os1 os1.c $$ execvp: No such file or directory $$ 
+  cmd [ls -l]                : ok :: $$ total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:12 compile.err -rwxr-xr-x 1 alon447 alon447
+  cmd [echo hello world]     : ok :: $$ hello world $$ execvp: No such file or directory $$ 
+  cmd [sleep 1 %]            : ok :: $$ $$ execvp: No such file or directory $$ 
+  cmd [pwd]                  : ok :: $$ /tmp/os1b_oLbilT $$ execvp: No such file or directory $$ 
+  cmd [invalid_command]      : ok :: $$ execvp: No such file or directory $$ execvp: No such file or directory $$ 
+  cmd [cat os1.c]            : ok :: $$ #include <stdio.h> #include <unistd.h> #include <sys/types.h> #include <sys/wait.h> #include <err

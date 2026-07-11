@@ -17,7 +17,9 @@ except ImportError:
 
 # Configuration
 TIMEOUT = 5
-SUBMISSIONS_DIR = "submissions"
+# SUBMISSIONS_DIR = "submissions"
+# SUBMISSIONS_DIR = "subs"
+SUBMISSIONS_DIR = "subs-26b"
 RESULTS_DIR = "grading_results"
 
 # Points for each test
@@ -139,6 +141,7 @@ def test_student(student_dir):
         
         passed = "test_content" in stdout
         error_msg = ""
+        partial = False  # logic works but wrong operator (reversed symbol or wrong position)
         
         # If correct syntax failed, diagnose the issue
         if not passed:
@@ -159,15 +162,40 @@ def test_student(student_dir):
                 stdout2 = ""
             
             if "test_content" in stdout2:
-                error_msg = "ERROR: Used '}' for input redirection (should be '{' per assignment)"
-            elif "$$" in stdout and stdout.count("$$") > 2:
-                error_msg = "ERROR: Redirection not recognized - command not executed"
+                error_msg = "PARTIAL: Used '}' (reversed) for input redirection (should be '{' per assignment)"
+                partial = True
             else:
-                error_msg = f"ERROR: Input redirection failed - got: {stdout.strip()[:50]}"
+                # Check if they used the suffix form: file{ instead of prefix {file
+                process = subprocess.Popen(
+                    ["./os2"],
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True
+                )
+                process.stdin.write("cat test_input.txt{\nexit\n")
+                process.stdin.flush()
+                try:
+                    stdout3, stderr3 = process.communicate(timeout=TIMEOUT)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    stdout3 = ""
+
+                if "test_content" in stdout3:
+                    error_msg = "PARTIAL: Used suffix 'file{' for input redirection (should be prefix '{file')"
+                    partial = True
+                elif "$$" in stdout and stdout.count("$$") > 2:
+                    error_msg = "ERROR: Redirection not recognized - command not executed"
+                else:
+                    error_msg = f"ERROR: Input redirection failed - got: {stdout.strip()[:50]}"
         
         if passed:
             results["input_redirect"] = {"passed": True, "points": POINTS["input_redirect"], "error": ""}
             total_points += POINTS["input_redirect"]
+        elif partial:
+            partial_pts = POINTS["input_redirect"] // 2
+            results["input_redirect"] = {"passed": False, "points": partial_pts, "error": error_msg}
+            total_points += partial_pts
         else:
             results["input_redirect"] = {"passed": False, "points": 0, "error": error_msg}
         
@@ -207,6 +235,7 @@ def test_student(student_dir):
         
         # If correct syntax failed, diagnose the issue
         if not passed:
+            partial = False  # logic works but wrong operator (reversed symbol or wrong position)
             # Check if they used reversed symbols: { for output
             process = subprocess.Popen(
                 ["./os2"],
@@ -226,14 +255,42 @@ def test_student(student_dir):
                 with open("test_output.txt", "r") as f:
                     content = f.read()
                 if "test_output" in content:
-                    error_msg = "ERROR: Used '{' for output redirection (should be '}' per assignment)"
+                    error_msg = "PARTIAL: Used '{' (reversed) for output redirection (should be '}' per assignment)"
+                    partial = True
                 os.remove("test_output.txt")
-            else:
-                error_msg = "ERROR: Output file not created"
+            if not partial:
+                # Check if they used the suffix form: file} instead of prefix }file
+                process = subprocess.Popen(
+                    ["./os2"],
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True
+                )
+                process.stdin.write("echo test_output test_output.txt}\nexit\n")
+                process.stdin.flush()
+                try:
+                    stdout3, stderr3 = process.communicate(timeout=TIMEOUT)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+
+                if os.path.exists("test_output.txt"):
+                    with open("test_output.txt", "r") as f:
+                        content = f.read()
+                    if "test_output" in content:
+                        error_msg = "PARTIAL: Used suffix 'file}' for output redirection (should be prefix '}file')"
+                        partial = True
+                    os.remove("test_output.txt")
+                if not partial:
+                    error_msg = "ERROR: Output file not created"
         
         if passed:
             results["output_redirect"] = {"passed": True, "points": POINTS["output_redirect"], "error": ""}
             total_points += POINTS["output_redirect"]
+        elif partial:
+            partial_pts = POINTS["output_redirect"] // 2
+            results["output_redirect"] = {"passed": False, "points": partial_pts, "error": error_msg}
+            total_points += partial_pts
         else:
             results["output_redirect"] = {"passed": False, "points": 0, "error": error_msg}
         
@@ -243,8 +300,12 @@ def test_student(student_dir):
         results["output_redirect"] = {"passed": False, "points": 0, "error": f"CRASH: {str(e)[:100]}"}
     
     # Test 7: Single Pipe
+    # A broken shell echoes the command line literally ("hello ! grep hello"),
+    # which would also contain "hello". Require the pipe output to contain "hello"
+    # AND not contain the un-executed pipe operator/command tokens.
     success, stdout, stderr = run_command(student_dir, "echo hello ! grep hello")
-    if success and "hello" in stdout:
+    pipe_executed = "!" not in stdout and "grep" not in stdout
+    if success and "hello" in stdout and pipe_executed:
         results["pipe_single"] = {"passed": True, "points": POINTS["pipe_single"], "error": ""}
         total_points += POINTS["pipe_single"]
     else:

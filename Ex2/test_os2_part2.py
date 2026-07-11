@@ -63,9 +63,14 @@ def check_for_specific_answers(text, q1_answers_to_track, q2_answers_to_track):
     if text is None:
         return None, None, False, False
     
-    # Find all numbers in the text
-    numbers = re.findall(r'\b(\d{1,3}(?:,\d{3})*|\d+)\b', text)
-    numbers = [int(n.replace(',', '')) for n in numbers]
+    # Find all numbers in the text.
+    # NOTE: a simple \b\d+\b fails on Hebrew-glued numbers like "נקבל516" or
+    # "הוא278" because Hebrew letters are \w in Python, so there is no word
+    # boundary between the letter and the digit and the number is dropped.
+    # Use digit-only lookarounds so numbers are extracted regardless of any
+    # adjacent (Hebrew/Latin) letters. Strip thousands separators first.
+    cleaned = re.sub(r'(?<=\d),(?=\d{3}\b)', '', text)
+    numbers = [int(n) for n in re.findall(r'(?<!\d)\d+(?!\d)', cleaned)]
     
     # Check if correct answers appear anywhere in the text
     q1_is_correct = CORRECT_Q1 in numbers
@@ -110,8 +115,10 @@ def analyze_student_pdfs(submissions_folder):
     for student_name in sorted(student_folders):
         student_path = os.path.join(submissions_folder, student_name)
         
-        # Look for PDF files
-        pdf_files = [f for f in os.listdir(student_path) if f.endswith('.pdf')]
+        # Look for PDF files (skip macOS '._' AppleDouble metadata files,
+        # which are not real PDFs and fail to parse)
+        pdf_files = [f for f in os.listdir(student_path)
+                     if f.endswith('.pdf') and not f.startswith('._')]
         
         if not pdf_files:
             results.append({
@@ -212,8 +219,9 @@ def save_results_to_csv(results, output_file):
     print(f"\nResults saved to {output_file}")
 
 def main():
-    submissions_folder = "submissions"
-    output_csv = "part2_extracted_answers.csv"
+    # submissions_folder = "submissions"
+    submissions_folder = "subs-26b"
+    output_csv = "grading_results/part2_extracted_answers.csv"
     
     if not os.path.exists(submissions_folder):
         print(f"Error: {submissions_folder} folder not found!")

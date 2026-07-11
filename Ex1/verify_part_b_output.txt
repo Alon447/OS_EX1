@@ -1,0 +1,18 @@
+﻿
+===================================================================
+STUDENT: ╫É╫Ö╫û╫æ╫£╫ö ╫í╫æ╫æ╫ò╫£╫Ö╫ö_89927_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 0)
+  prompt '$$ ': MISSING (rc=0, got: [$$execvp: No such file or directory $$])
+  cmd [ls]                   : ok :: $$compile.err os1 os1.c $$execvp: No such file or directory $$
+  cmd [ls -l]                : ok :: $$total 24 -rw-r--r-- 1 alon447 alon447     0 May 29 18:07 compile.err -rwxr-xr-x 1 alon447 alon447 
+  cmd [echo hello world]     : ok :: $$hello world $$execvp: No such file or directory $$
+  cmd [sleep 1 %]            : ok :: $$$$execvp: No such file or directory $$
+  cmd [pwd]                  : ok :: $$/tmp/os1b_U356jL $$execvp: No such file or directory $$
+  cmd [invalid_command]      : ok :: $$execvp: No such file or directory $$execvp: No such file or directory $$
+  cmd [cat os1.c]            : ok :: $$#define CRT_SECURE_NO_WARNINGS #include <stdio.h> #include <string.h>  #include <unistd.h>    // f
+
+===================================================================
+STUDENT: ╫₧╫É╫Ö ╫ù╫Æ╫æ╫Ö_89891_assignsubmission_file
+===================================================================
+  COMPILE: ok  (warnings: 5)

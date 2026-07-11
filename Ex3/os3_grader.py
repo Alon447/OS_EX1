@@ -13,15 +13,20 @@ import pandas as pd
 from datetime import datetime
 
 class OS3Grader:
-    def __init__(self):
-        # Part A: Queue (50 points total)
+    def __init__(self, single_part=False):
+        # single_part=True  -> HW3_2026b: queue only, graded out of 100.
+        # single_part=False -> HW3_2026 : queue (50) + module/script/makefile (50).
+        self.single_part = single_part
+        self.queue_max = 100 if single_part else 50
+
+        # Part A: Queue
+        # NOTE: minor code-style / micro-performance patterns (locking a cached
+        # single-value read, malloc-after-lock, free-before-unlock) are NOT graded:
+        # HW3 grades correctness, not style ("...מתמקד בנכונות הקוד ... ולא עיצוב הקוד").
         self.queue_criteria = {
-            'has_main': ('Has main() function', -10, 'major'),
+            'has_main': ('Has main() function (disqualifies entire Part A)', -50, 'major'),
             'missing_sum': ('Missing or broken sum() function', -8, 'major'),
             'wrong_type': ('Using int instead of long', -5, 'minor'),
-            'malloc_in_lock': ('malloc() inside critical section', -5, 'minor'),
-            'free_in_lock': ('free() inside critical section', -5, 'minor'),
-            'lock_for_read': ('Lock used for simple value read', -3, 'minor'),
             'no_destroy_free': ('destroy() doesnt free all items', -5, 'minor'),
             'static_global': ('Uses static/global variables', -8, 'major'),
             'missing_cv': ('Missing or wrong condition variables', -10, 'major'),
@@ -78,19 +83,28 @@ class OS3Grader:
         except:
             return None
     
+    @staticmethod
+    def strip_comments(code):
+        """Remove C comments so they can't trip up the structural checks."""
+        code = re.sub(r'/\*.*?\*/', '', code, flags=re.DOTALL)
+        code = re.sub(r'//[^\n]*', '', code)
+        return code
+    
     # ========== PART A: QUEUE CHECKS ==========
     
     def check_queue(self, content):
         """Check os3q.c for common issues"""
         issues = {}
         
+        # Comment-stripped copy used for all structural / lock checks.
+        code = self.strip_comments(content)
+        
         # Auto-fail: has main
-        issues['has_main'] = bool(re.search(r'int\s+main\s*\(', content))
+        issues['has_main'] = bool(re.search(r'\bint\s+main\s*\(', code))
         
         # Missing sum function - just check if function signature exists
-        # Don't try to parse function body (nested braces are too complex for simple regex)
         # Accept both lowercase and capitalized versions (queueos_sum or QueueOS_sum)
-        has_sum_signature = bool(re.search(r'long\s+[Qq]ueue[Oo][Ss]_sum\s*\([^)]*\)', content))
+        has_sum_signature = bool(re.search(r'long\s+[Qq]ueue[Oo][Ss]_sum\s*\([^)]*\)', code))
         issues['missing_sum'] = not has_sum_signature
         
         # Wrong data type (int instead of long)
@@ -100,49 +114,26 @@ class OS3Grader:
         else:
             issues['wrong_type'] = False
         
-        # malloc in critical section (enqueue)
-        enqueue = re.search(r'queueos_enqueue\s*\([^)]*\)\s*\{([^}]*)\}', content, re.DOTALL)
-        if enqueue:
-            func = enqueue.group(1)
-            lock_pos = func.find('pthread_mutex_lock')
-            malloc_pos = func.find('malloc')
-            issues['malloc_in_lock'] = lock_pos != -1 and malloc_pos != -1 and malloc_pos > lock_pos
-        else:
-            issues['malloc_in_lock'] = False
-        
-        # free in critical section (dequeue)
-        dequeue = re.search(r'queueos_dequeue\s*\([^)]*\)\s*\{([^}]*)\}', content, re.DOTALL)
-        if dequeue:
-            func = dequeue.group(1)
-            unlock_pos = func.find('pthread_mutex_unlock')
-            free_pos = func.find('free(')
-            issues['free_in_lock'] = unlock_pos != -1 and free_pos != -1 and free_pos < unlock_pos
-        else:
-            issues['free_in_lock'] = False
-        
-        # Lock for simple read (size or sum)
-        size_match = re.search(r'queueos_size\s*\([^)]*\)\s*\{([^}]*)\}', content, re.DOTALL)
-        sum_match_check = re.search(r'queueos_sum\s*\([^)]*\)\s*\{([^}]*)\}', content, re.DOTALL)
-        issues['lock_for_read'] = (
-            (size_match and 'pthread_mutex_lock' in size_match.group(1)) or
-            (sum_match_check and 'pthread_mutex_lock' in sum_match_check.group(1))
-        )
+        # NOTE: minor style/perf checks (malloc-after-lock, free-before-unlock,
+        # locking a cached single-value read) are intentionally NOT graded -
+        # HW3 grades correctness, not code style.
         
         # destroy doesn't free items
         # Check if destroy function or any helper function frees items
         # Look for any function that frees queue nodes (loop + free pattern)
-        has_cleanup = bool(re.search(r'(while|for).*?free\(', content, re.DOTALL))
+        has_cleanup = bool(re.search(r'(while|for).*?free\s*\(', code, re.DOTALL))
         issues['no_destroy_free'] = not has_cleanup
         
         # Static/global variables (NOT static functions - those are OK!)
-        temp = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-        temp = re.sub(r'//.*', '', temp)
-        temp = re.sub(r'struct\s+\w+\s*\{[^}]*\}', '', temp, flags=re.DOTALL)
+        temp = re.sub(r'struct\s+\w+\s*\{[^}]*\}', '', code, flags=re.DOTALL)
         # Match static variables but NOT static functions (those have parentheses)
         issues['static_global'] = bool(re.search(r'^\s*static\s+(int|long|char|pthread_\w+)\s+\w+\s*[;=]', temp, re.MULTILINE))
         
-        # Missing condition variables
-        issues['missing_cv'] = not ('pthread_cond_wait' in content and 'pthread_cond_signal' in content)
+        # Missing condition variables. Accept signal OR broadcast to wake waiters
+        # (a single condition variable used with broadcast is a valid pattern).
+        has_wait = 'pthread_cond_wait' in code
+        has_wake = 'pthread_cond_signal' in code or 'pthread_cond_broadcast' in code
+        issues['missing_cv'] = not (has_wait and has_wake)
         
         return issues
     
@@ -295,7 +286,7 @@ class OS3Grader:
         student_name = os.path.basename(student_folder)
         result = {
             'name': student_name,
-            'queue_points': 50,
+            'queue_points': self.queue_max,
             'module_points': 40,
             'script_points': 5,
             'makefile_points': 5,
@@ -313,17 +304,33 @@ class OS3Grader:
             content = self.read_file(queue_file)
             if content:
                 issues = self.check_queue(content)
-                for key, found in issues.items():
-                    if found:
-                        desc, points, severity = self.queue_criteria[key]
-                        result['queue_points'] += points
-                        result['errors'].append(f"[Queue] {desc} ({points} pts)")
+                # Adding main() disqualifies the entire Part A per the spec:
+                # zero out the section and report only that failure.
+                if issues.get('has_main'):
+                    desc, points, severity = self.queue_criteria['has_main']
+                    result['queue_points'] = 0
+                    result['errors'].append(f"[Queue] {desc} ({points} pts)")
+                else:
+                    for key, found in issues.items():
+                        if found:
+                            desc, points, severity = self.queue_criteria[key]
+                            result['queue_points'] += points
+                            result['errors'].append(f"[Queue] {desc} ({points} pts)")
             else:
                 result['queue_points'] = 0
                 result['errors'].append("[Queue] Could not read file")
         else:
             result['queue_points'] = 0
             result['errors'].append("[Queue] File not found")
+        
+        # Single-part mode (HW3_2026b): grade the queue only, out of 100.
+        if self.single_part:
+            result['queue_points'] = max(0, result['queue_points'])
+            result['module_points'] = 0
+            result['script_points'] = 0
+            result['makefile_points'] = 0
+            result['total'] = result['queue_points']
+            return result
         
         # Part B: Module
         mod_file = self.find_file(student_folder, 'os3mod.c')
@@ -414,13 +421,18 @@ class OS3Grader:
             # Print detailed results
             print(f"\n{'='*70}")
             print(f"Student: {result['name']}")
-            print(f"  Part A (Queue):                    {result['queue_points']:2}/50")
-            print(f"  Part B (Module+Script+Makefile):   {part_b_total:2}/50")
-            print(f"    - Module (40):                   {result['module_points']:2}/40")
-            print(f"    - Script (5):                    {result['script_points']:2}/5")
-            print(f"    - Makefile (5):                  {result['makefile_points']:2}/5")
-            print(f"  {'─'*40}")
-            print(f"  TOTAL:                             {result['total']:3}/100")
+            if self.single_part:
+                print(f"  Queue (os3q.c):                    {result['queue_points']:3}/100")
+                print(f"  {'─'*40}")
+                print(f"  TOTAL:                             {result['total']:3}/100")
+            else:
+                print(f"  Part A (Queue):                    {result['queue_points']:2}/50")
+                print(f"  Part B (Module+Script+Makefile):   {part_b_total:2}/50")
+                print(f"    - Module (40):                   {result['module_points']:2}/40")
+                print(f"    - Script (5):                    {result['script_points']:2}/5")
+                print(f"    - Makefile (5):                  {result['makefile_points']:2}/5")
+                print(f"  {'─'*40}")
+                print(f"  TOTAL:                             {result['total']:3}/100")
             
             if result['errors']:
                 print(f"\n  Errors:")
@@ -456,14 +468,22 @@ class OS3Grader:
             
             part_b_total = r['module_points'] + r['script_points'] + r['makefile_points']
             
-            df_data.append({
-                'Student': r['name'],
-                'Part A: Queue (50)': r['queue_points'],
-                'Part A Errors': '\n'.join(queue_errors_clean) if queue_errors_clean else '',
-                'Part B: Module+Script+Makefile (50)': part_b_total,
-                'Part B Errors': '\n'.join(part_b_errors_clean) if part_b_errors_clean else '',
-                'Total': r['total']
-            })
+            if self.single_part:
+                df_data.append({
+                    'Student': r['name'],
+                    'Queue (100)': r['queue_points'],
+                    'Queue Errors': '\n'.join(queue_errors_clean) if queue_errors_clean else '',
+                    'Total': r['total'],
+                })
+            else:
+                df_data.append({
+                    'Student': r['name'],
+                    'Part A: Queue (50)': r['queue_points'],
+                    'Part A Errors': '\n'.join(queue_errors_clean) if queue_errors_clean else '',
+                    'Part B: Module+Script+Makefile (50)': part_b_total,
+                    'Part B Errors': '\n'.join(part_b_errors_clean) if part_b_errors_clean else '',
+                    'Total': r['total']
+                })
         
         df = pd.DataFrame(df_data)
         
@@ -545,13 +565,23 @@ class OS3Grader:
         
         sorted_results = sorted(results, key=lambda x: x['total'])
         for i, r in enumerate(sorted_results[:10], 1):
-            part_b = r['module_points'] + r['script_points'] + r['makefile_points']
-            print(f"  {i:2}. {r['name']:40} → {r['total']:3}/100 (A:{r['queue_points']:2} B:{part_b:2})")
+            if self.single_part:
+                print(f"  {i:2}. {r['name']:40} → {r['total']:3}/100")
+            else:
+                part_b = r['module_points'] + r['script_points'] + r['makefile_points']
+                print(f"  {i:2}. {r['name']:40} → {r['total']:3}/100 (A:{r['queue_points']:2} B:{part_b:2})")
         
         print(f"{'='*70}\n")
 
 if __name__ == "__main__":
-    submissions_folder = sys.argv[1] if len(sys.argv) > 1 else "submissions"
-    
-    grader = OS3Grader()
-    grader.grade_all(submissions_folder)
+    import argparse
+    parser = argparse.ArgumentParser(description="OS3 grader (HW3-2026 / HW3-2026b)")
+    parser.add_argument("submissions_folder", nargs="?", default="submissions",
+                        help="Folder with student submissions (default: submissions)")
+    parser.add_argument("--parts", type=int, choices=[1, 2], default=2,
+                        help="1 = queue only, out of 100 (HW3_2026b); "
+                             "2 = queue 50 + module/script/makefile 50 (HW3_2026). Default: 2")
+    args = parser.parse_args()
+
+    grader = OS3Grader(single_part=(args.parts == 1))
+    grader.grade_all(args.submissions_folder)
